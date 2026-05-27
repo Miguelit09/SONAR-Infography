@@ -18,6 +18,27 @@ npm run build
 npm run preview
 ```
 
+## Despliegue (GitHub Pages)
+
+El sitio se publica automáticamente en cada push a `main` mediante [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
+
+**URL:** https://miguelit09.github.io/SONAR-Infographic/
+
+### Activar Pages en el repositorio
+
+1. En GitHub: **Settings → Pages**
+2. En **Build and deployment → Source**, elige **GitHub Actions**
+3. Tras el primer push con el workflow, revisa la pestaña **Actions**; cuando termine, la URL aparecerá en Settings → Pages
+
+Para comprobar localmente antes de subir cambios:
+
+```bash
+npm run build
+npm run preview
+```
+
+Abre la URL que indique `preview` (incluye el prefijo `/SONAR-Infographic/`).
+
 ## Estructura
 
 | Ruta | Descripción |

@@ -7,7 +7,7 @@ export type ImageSlot = {
 
 /**
  * Configuración central de imágenes.
- * Archivos en public/images/ — rutas desde la raíz del sitio (/images/...).
+ * Archivos en public/images/ — rutas como /images/...; getImage() aplica BASE_URL de Vite.
  */
 export const IMAGES: Record<string, ImageSlot> = {
   // Vista 1 — Ondas
@@ -95,6 +95,13 @@ export const IMAGES: Record<string, ImageSlot> = {
 
 export type ImageKey = keyof typeof IMAGES;
 
+function resolvePublicSrc(src: string): string {
+  if (!src || src.startsWith('http://') || src.startsWith('https://')) return src;
+  const path = src.startsWith('/') ? src.slice(1) : src;
+  return `${import.meta.env.BASE_URL}${path}`;
+}
+
 export function getImage(key: ImageKey): ImageSlot {
-  return IMAGES[key];
+  const slot = IMAGES[key];
+  return { ...slot, src: resolvePublicSrc(slot.src) };
 }
